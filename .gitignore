@@ -1,0 +1,5 @@
+/.venv/
+/.idea/
+/Osu/
+/settings.json
+/Backups/*.zip
