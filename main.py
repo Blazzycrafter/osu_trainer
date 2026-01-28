@@ -65,9 +65,8 @@ def menu_manage_template(paths, debug_mode: bool) -> None:
             break
 
 def main() -> None:
-    require_windows()
-
     settings = load_settings(os.path.join(os.getcwd(), "settings.json"))
+    require_windows()
     debug_mode = bool(settings.get("debug_mode", True))
     paths = build_paths(settings)
 
