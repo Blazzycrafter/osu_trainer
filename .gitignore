@@ -3,3 +3,5 @@
 /Osu/
 /settings.json
 /Backups/*.zip
+__pycache__/
+*.py[cod]
