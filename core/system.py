@@ -4,6 +4,28 @@ import platform
 from dataclasses import dataclass
 from typing import Dict, Any
 
+_DEFAULT_SETTINGS: Dict[str, Any] = {
+    "debug_mode": True,
+    "paths": {
+        "work_root": ".",
+        "osu_root_dirname": "Osu",
+        "backups_dirname": "Backups",
+        "backup_filename": "osu_main_system_backup.zip",
+        "temp_download_filename": "osu_temp.nupkg",
+        "extract_dirname": "osu_extract",
+    },
+    "github": {
+        "latest_release_api": "https://api.github.com/repos/ppy/osu/releases/latest",
+        "asset_name_suffix": "-full.nupkg",
+        "exclude_keywords": [
+            "linux",
+            "osx",
+            "mac",
+            "arm",
+        ],
+    },
+}
+
 @dataclass(frozen=True)
 class Paths:
     base_dir: str
@@ -25,6 +47,9 @@ def require_windows() -> None:
 
 def load_settings(settings_path: str) -> Dict[str, Any]:
     import json
+    if not os.path.exists(settings_path):
+        with open(settings_path, "w", encoding="utf-8") as f:
+            json.dump(_DEFAULT_SETTINGS, f, indent=2, ensure_ascii=False)
     with open(settings_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
